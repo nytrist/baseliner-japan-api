@@ -20,7 +20,7 @@ class ReadingModel(db.Model):
 	ss_id = db.Column(db.ForeignKey('stations.ss_id'))
 	#ss_num = db.Column(db.ForeignKey('stations.ss_num'))
 	#ss_id = db.Column(db.String(10))
-	ss_num = db.Column(db.String(10)) # maybe remove...
+	ss_num = db.Column(db.Integer) # maybe remove...
 	ss_conn_att = db.Column(db.Integer)
 	ss_send_fail = db.Column(db.Integer)
 	ss_encl_temp = db.Column(db.Float(precision=2))
