@@ -3,10 +3,10 @@ from db import db
 class StationModel(db.Model):
 	__tablename__ = 'stations'
 
-	id = db.Column(db.Integer, primary_key=True)
+	#id = db.Column(db.Integer, primary_key=True)
 
 #Sensor Station Meta data - device id, site location, station number, location and sensor ids
-	ss_id = db.Column(db.String(20))
+	ss_id = db.Column(db.String(20), primary_key=True)
 	gw_id = db.Column(db.String(20))
 	ss_site = db.Column(db.String(20))
 	ss_num = db.Column(db.Integer)
@@ -21,8 +21,7 @@ class StationModel(db.Model):
 
 	readings = db.relationship('ReadingModel', lazy='dynamic') # check timing - maybe better to remove lazy dynamic
 
-	def __init__(self, ss_id, gw_id, ss_site, ss_num, ss_locate, ss_vwcIdShlw, ss_vwcIdMid, ss_vwcIdDeep, ss_phId, ss_co2Id, ss_tempId, ss_bmeId):
-		self.ss_id = ss_id
+	def __init__(self, gw_id, ss_site, ss_num, ss_locate, ss_vwcIdShlw, ss_vwcIdMid, ss_vwcIdDeep, ss_phId, ss_co2Id, ss_tempId, ss_bmeId):
 		self.gw_id = gw_id
 		self.ss_site = ss_site
 		self.ss_num = ss_num
@@ -37,7 +36,7 @@ class StationModel(db.Model):
 
 
 	def json(self):
-		return{'ss_id': self.ss_id, 'gw_id':self.gw_id, 'ss_site': self.ss_site, 'ss_num': self.ss_num,'ss_locate': self.ss_locate,'ss_vwcIdShlw': self.ss_vwcIdShlw, 'ss_vwcIdMid': self.ss_vwcIdMid,'ss_vwcIdDeep': self.ss_vwcIdDeep,'ss_phId': self.ss_phId, 'ss_co2Id': self.ss_co2Id,'ss_tempId': self.ss_tempId,'ss_bmeId': self.ss_bmeId, 'readings': [reading.json() for reading in self.readings.all()]}
+		return{'ss_id':self.ss_id,'gw_id':self.gw_id, 'ss_site': self.ss_site, 'ss_num': self.ss_num,'ss_locate': self.ss_locate,'ss_vwcIdShlw': self.ss_vwcIdShlw, 'ss_vwcIdMid': self.ss_vwcIdMid,'ss_vwcIdDeep': self.ss_vwcIdDeep,'ss_phId': self.ss_phId, 'ss_co2Id': self.ss_co2Id,'ss_tempId': self.ss_tempId,'ss_bmeId': self.ss_bmeId, 'readings': [reading.json() for reading in self.readings.all()]}
 #search by serial number
 	@classmethod
 	def find_by_id(cls, ss_id):
