@@ -1,4 +1,4 @@
-#import os
+import os
 
 from flask import Flask
 from flask_restful import Api
@@ -13,8 +13,8 @@ from resources.station import Station, StationMod, StationList
 from resources.gateway import Gateway, GatewayMod, GatewayList
 
 app  = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
-#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = "jc"
 api = Api(app)
