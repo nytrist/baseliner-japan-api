@@ -3,12 +3,11 @@ from db import db
 class StationModel(db.Model):
 	__tablename__ = 'stations'
 
-	id = db.Column(db.Integer, primary_key=True)
+	#id = db.Column(db.Integer, primary_key=True)
 
 #Sensor Station Meta data - device id, site location, station number, location and sensor ids
-	ss_id = db.Column(db.String(20))
-	gw_id = db.Column(db.ForeignKey('gateways.gw_id'))
-	#gw_id = db.Column(db.String(20))
+	ss_id = db.Column(db.String(20), primary_key=True)
+	gw_id = db.Column(db.String(20))
 	ss_site = db.Column(db.String(20))
 	ss_num = db.Column(db.Integer)
 	ss_locate = db.Column(db.String(20))
@@ -22,8 +21,7 @@ class StationModel(db.Model):
 
 	readings = db.relationship('ReadingModel', lazy='dynamic') # check timing - maybe better to remove lazy dynamic
 
-	def __init__(self, ss_id, gw_id, ss_site, ss_num, ss_locate, ss_vwcIdShlw, ss_vwcIdMid, ss_vwcIdDeep, ss_phId, ss_co2Id, ss_tempId, ss_bmeId):
-		self.ss_id = ss_id
+	def __init__(self, gw_id, ss_site, ss_num, ss_locate, ss_vwcIdShlw, ss_vwcIdMid, ss_vwcIdDeep, ss_phId, ss_co2Id, ss_tempId, ss_bmeId):
 		self.gw_id = gw_id
 		self.ss_site = ss_site
 		self.ss_num = ss_num
