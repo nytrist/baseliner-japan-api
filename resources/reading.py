@@ -73,7 +73,6 @@ class ReadingAdd(Resource):
 		except:
 			return{"message": "An error occurred inserting the reading."}, 500 # internal server error
 
-		#return 201
 		return reading.json(), 201
 
 #delete readings

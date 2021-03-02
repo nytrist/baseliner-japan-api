@@ -85,7 +85,7 @@ class StationMod(Resource):
 			writer = csv.writer(f, delimiter=",")
 			writer.writerow([time.ctime(), ss_id, *data.values()])
 
-		station = StationModel(ss_id, **data)
+		station = StationModel(ss_id, data['gw_id'], data['ss_site'], data['ss_num'], data['ss_locate'],data['ss_vwcIdShlw'],data['ss_vwcIdMid'],data['ss_vwcIdDeep'],data['ss_phId'],data['ss_co2Id'],data['ss_tempId'],data['ss_bmeId'])
 
 		try:
 			station.save_to_db()
