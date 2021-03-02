@@ -73,7 +73,8 @@ class ReadingAdd(Resource):
 		except:
 			return{"message": "An error occurred inserting the reading."}, 500 # internal server error
 
-		return reading.json(), 201
+		return 201 
+		#return reading.json(), 201
 
 #delete readings
 	def delete(self, reading_id):
