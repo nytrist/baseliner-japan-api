@@ -11,7 +11,7 @@ class ReadingModel(db.Model):
 	#gw_id = db.Column(db.String(20))
 	gw_rssi = db.Column(db.Integer)
 	ss_rssi = db.Column(db.Integer)
-	gw_conn_att = db.Column(db.Integer)
+	gw_send_fail = db.Column(db.Integer)
 	gw_encl_temp = db.Column(db.Float(precision=2))
 	gw_batt = db.Column(db.Float(precision=2))
 	gw_solar_vol = db.Column(db.Float(precision=2))
@@ -42,14 +42,14 @@ class ReadingModel(db.Model):
 	soil_temp = db.Column(db.Float(precision=2))
 	soil_co2 = db.Column(db.Float(precision=2))
 
-	def __init__(self, gw_date_time, gw_id, gw_rssi, ss_rssi, gw_conn_att, gw_encl_temp, gw_batt, gw_solar_vol, ss_id, ss_num, ss_conn_att, ss_send_fail, ss_encl_temp, ss_batt, ss_solar_vol, ss_air_temp, ss_baro_press, ss_air_humid, ss_alt, soil_vwcShlw, soil_vwcMid, soil_vwcDeep, soil_ph, soil_temp, soil_co2):
+	def __init__(self, gw_date_time, gw_id, gw_rssi, ss_rssi, gw_send_fail, gw_encl_temp, gw_batt, gw_solar_vol, ss_id, ss_num, ss_conn_att, ss_send_fail, ss_encl_temp, ss_batt, ss_solar_vol, ss_air_temp, ss_baro_press, ss_air_humid, ss_alt, soil_vwcShlw, soil_vwcMid, soil_vwcDeep, soil_ph, soil_temp, soil_co2):
 		self.gw_date_time = gw_date_time
 
 #gw diagnostics
 		self.gw_id = gw_id
 		self.gw_rssi = gw_rssi
 		self.ss_rssi = ss_rssi
-		self.gw_conn_att = gw_conn_att
+		self.gw_send_fail = gw_send_fail
 		self.gw_encl_temp = gw_encl_temp
 		self.gw_batt = gw_batt
 		self.gw_solar_vol = gw_solar_vol
@@ -79,7 +79,7 @@ class ReadingModel(db.Model):
 
 	# return reading as json
 	def json(self):
-		return{'reading_id': self.reading_id, 'gw_date_time': self.gw_date_time, 'gw_id': self.gw_id, 'gw_rssi': self.gw_rssi, 'ss_rssi': self.ss_rssi, 'gw_conn_att': self.gw_conn_att, 'gw_encl_temp': self.gw_encl_temp, 'gw_batt': self.gw_batt, 'gw_solar_vol': self.gw_solar_vol,'ss_id': self.ss_id, 'ss_num': self.ss_num, 'ss_conn_att': self.ss_conn_att, 'ss_send_fail': self.ss_send_fail,'ss_encl_temp': self.ss_encl_temp, 'ss_batt': self.ss_batt,'ss_solar_vol': self.ss_solar_vol,'ss_air_temp': self.ss_air_temp,'ss_baro_press': self.ss_baro_press, 'ss_air_humid': self.ss_air_humid, 'ss_alt': self.ss_alt,'soil_vwcShlw': self.soil_vwcShlw, 'soil_vwcMid': self.soil_vwcMid,'soil_vwcDeep': self.soil_vwcDeep,'soil_ph': self.soil_ph, 'soil_temp': self.soil_temp, 'soil_co2': self.soil_co2}
+		return{'reading_id': self.reading_id, 'gw_date_time': self.gw_date_time, 'gw_id': self.gw_id, 'gw_rssi': self.gw_rssi, 'ss_rssi': self.ss_rssi, 'gw_send_fail': self.gw_send_fail, 'gw_encl_temp': self.gw_encl_temp, 'gw_batt': self.gw_batt, 'gw_solar_vol': self.gw_solar_vol,'ss_id': self.ss_id, 'ss_num': self.ss_num, 'ss_conn_att': self.ss_conn_att, 'ss_send_fail': self.ss_send_fail,'ss_encl_temp': self.ss_encl_temp, 'ss_batt': self.ss_batt,'ss_solar_vol': self.ss_solar_vol,'ss_air_temp': self.ss_air_temp,'ss_baro_press': self.ss_baro_press, 'ss_air_humid': self.ss_air_humid, 'ss_alt': self.ss_alt,'soil_vwcShlw': self.soil_vwcShlw, 'soil_vwcMid': self.soil_vwcMid,'soil_vwcDeep': self.soil_vwcDeep,'soil_ph': self.soil_ph, 'soil_temp': self.soil_temp, 'soil_co2': self.soil_co2}
 #search for readings by reading_id
 	@classmethod
 	def find_by_id(cls, reading_id):

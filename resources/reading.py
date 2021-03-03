@@ -24,7 +24,7 @@ class ReadingAdd(Resource):
 		#csv in post body of post request
 		data = request.data.decode('utf-8')
 
-			#save reading to CSV file
+		#save reading to CSV file
 		with open("readings.csv", "a", ) as f:
 			writer = csv.writer(f, delimiter=",")
 			writer.writerow([time.ctime(), data])
@@ -40,7 +40,7 @@ class ReadingAdd(Resource):
 			gw_rssi = data[2]
 			ss_rssi = data[3]
 			gw_conn_att = data[4]
-			gw_encl_temp = data[6]
+			gw_encl_temp = data[5]
 			gw_batt = data[6]
 			gw_solar_vol = data[7]
 
